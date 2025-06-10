@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Departamentos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+      color: #000;
+      background: #fff;
+    }
+
+    header {
+      background-color: #417690; 
+      color: #f5dd5d;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 100px auto 40px auto;
+      padding: 0 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    thead {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    .no-registro {
+      font-style: italic;
+      color: #777;
+    }
+
+    .btn {
+      padding: 5px 10px;
+      margin: 0 2px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: white;
+    }
+    .btn-agregar {
+      background-color: #28a745; 
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    .btn-editar {
+      background-color: #007bff; 
+    }
+    .btn-eliminar {
+      background-color: #dc3545; 
+    }
+    nav a{
+      color: white;
+      font-weight: bold;/* Negrita */
+      font-size: 1rem;/* Tamaño del texto */
+      float: right;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+  </style>
+</head>
+<body>
+  <header>Lista de Departamentos
+    <nav>
+      <a href="{%url 'home'%}">HOME</a><!-- Enlace a la página principal -->
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Botón para crear un nuevo departamento -->
+    <a href="{% url 'crear_departamento' %}" class="btn btn-agregar">+ Agregar Departamento</a>
+   
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Sigla</th>
+          <th>Piso</th>
+          <th>Oficina</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for departamento in departamentos %}
+          <tr>
+            <td>{{ departamento.nombre }}</td>
+            <td>{{ departamento.sigla }}</td>
+            <td>{{ departamento.piso }}</td>
+            <td>{{ departamento.oficina }}</td>
+            <td>
+                <a href="{% url 'editar_departamento' departamento.id %}" class="btn btn-editar">Modificar</a> |
+                <a href="{% url 'eliminar_departamento' departamento.id %}" class="btn btn-eliminar">Eliminar</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="6" class="no-registro">No hay departamentos registrados.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

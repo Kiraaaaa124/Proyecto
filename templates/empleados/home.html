@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nexus IT</title>
+    <style>
+        div {
+            font-family: Arial, sans-serif;
+            background-color: #417690;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            color: #f5dd5d;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-left: 20px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>PROYECTO NEXUS IT</h1>
+        <nav>
+            <a href="{% url 'lista_departamentos'%}">Departamentos</a><!-- Enlace a la lista de departamentos-->
+            <a href="{% url 'lista_empleados'%}">Empleados</a><!-- Enlace a la lista de empleados -->
+        </nav>
+    </div>
+    <p> Integrantes:</p>
+        <ul>
+           <li>Lucas Arzamendia</li>
+           <li>Daniel Baptista</li>
+           <li>Lucas Prestianni</li>
+           <li>Candela Garcete</li>
+           <li>Valentina Salazar</li>
+           <li>Rodrigo Vargas</li>
+        </ul>
+
+    
+

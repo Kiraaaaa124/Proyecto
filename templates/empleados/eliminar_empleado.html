@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eliminar Empleado</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color:#f0f2f5;
+      padding: 2rem;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background:rgb(255, 255, 255);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    form button {
+      background-color:rgb(198, 46, 61);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-right: 1rem;
+    }
+    form button:hover {
+      background-color: #a71d2a;
+    }
+    a.back-link {
+      display: inline-block;
+      margin-top: 1rem;
+      text-decoration: underline;
+      font-weight: 600;
+      color: #333;
+    }
+    a.back-link:hover {
+      color: #501217;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Eliminar Empleado</h1>
+    <p>¿Estás seguro que quieres eliminar al empleado <strong>{{ object.nombre }}</strong>?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit">Sí, eliminar</button>
+      <a href="{% url 'lista_empleados' %}" class="back-link">Cancelar</a><!-- Enlace a la lista de empleados-->
+    </form>
+  </div>
+</body>
+</html>

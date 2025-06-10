@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detalle del Empleado</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+      color: #000;
+      background: #fff;
+    }
+
+    header {
+      background-color: #417690;
+      color: #f5dd5d;
+      padding: 0;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      float: right;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 140px auto 40px auto;
+      padding: 0 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      vertical-align: top;
+    }
+
+    td ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    td ul li {
+      margin-bottom: 2px;
+    }
+
+    .no-registro {
+      font-style: italic;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Detalle del Empleado</h1>
+    <nav>
+      <a href="{% url 'home' %}">Home</a><!-- Enlace a la página principal -->
+      <a href="{% url 'lista_empleados' %}" class="btn-volver">Lista</a><!-- Enlace a la lista de empleados -->
+    </nav>
+  </header>
+
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Fecha de Nacimiento</th>
+          <th>País</th>
+          <th>Puesto</th>
+          <th>Departamento</th>
+          <th>Habilidades</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ empleado.nombre }}</td>
+          <td>{{ empleado.apellido }}</td>
+          <td>{{ empleado.email }}</td>
+          <td>{{ empleado.fecha_nac }}</td>
+          <td>{{ empleado.pais }}</td>
+          <td>{{ empleado.get_trabajo_display }}</td>
+          <td>{{ empleado.departamento.nombre }}</td>
+          <td>
+            {% if empleado.habilidades.all %}
+              <ul>
+                {% for hab in empleado.habilidades.all %}
+                  <li>{{ hab.habilidad }}</li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <span class="no-registro">Sin habilidades</span>
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Empleados</title><!-- Título que se mostrará en la pestaña-->
+  <style>
+    body {
+      font-family: Arial, sans-serif;/* Fuente*/
+      padding: 0; /*Elimina relleno*/
+      margin: 0;/*Elimina márgenes*/
+      color: #000;
+      background: #fff;
+    }
+
+    header {
+      background-color: #417690; 
+      color: #f5dd5d;
+      padding: 0px 0;/*Espaciado arriba y abajo*/
+      text-align: center;/*Centrado del texto*/
+      font-size: 1.2rem;/*Tamaño del texto*/
+      font-weight: 700;/*Negrita*/
+      letter-spacing: 1px;/*Espacio entre letras*/
+      position: fixed;/*Posición fija al scrollear*/
+      width: 100%;/*Usa todo el ancho de la pantalla*/
+      top: 0;/*Anclado arriba*/
+      left: 0;
+      z-index: 100;/*Capa superior (evita que lo tape otro elemento) */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);/*Sombra inferior*/
+    }
+
+    nav a {
+      color: white;
+      font-weight: bold;/* Negrita */
+      font-size: 1rem;/* Tamaño del texto */
+      float: right;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+      text-decoration: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 130px auto 40px auto; /* Espaciado superior, centrado horizontal */
+      padding: 0 20px;/* Relleno lateral */
+      box-sizing: border-box;
+      overflow-x: auto; /* Scroll horizontal para tablas anchas */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      table-layout: auto;
+    }
+
+    thead {
+      background-color: #f5f5f5;
+      font-weight: bold;/* Texto en negrita */
+    }
+
+    th, td {
+      border: 1px solid #ddd;/* Borde gris claro */
+      padding: 10px;/* Espaciado interno */
+      text-align: center;/* Centrado del texto */
+      vertical-align: top;/* Alineación vertical arriba */
+    }
+
+    td ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    td ul li {
+      margin-bottom: 2px;
+    }
+
+    .no-registro {
+      font-style: italic;/* Texto en cursiva */
+      color: #777;
+    }
+
+    .btn {
+      padding: 5px 10px;/* Relleno interno */
+      margin: 0 2px;/* Margen lateral */
+      text-decoration: none;/* Sin subrayado */
+      border-radius: 4px; /* Bordes redondeados */
+      font-size: 0.85rem; /* Tamaño del texto */
+      color: white;
+      display: inline-block;
+    }
+    .btn-agregar {
+      background-color: #28a745; 
+      margin-bottom: 15px;
+    }
+    .btn-editar {
+      background-color: #007bff; 
+    }
+    .btn-eliminar {
+      background-color: #dc3545; 
+    }
+    .btn-detalle{
+      background-color: rgba(235, 185, 6, 0.77);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lista de Empleados</h1>
+    <nav>
+      <a href="{%url 'home'%}">HOME</a><!-- Enlace a la página principal -->
+    </nav>
+    </header>  
+
+  <div class="container">
+    <a href="{% url 'crear_empleado' %}" class="btn btn-agregar">+ Agregar Empleado</a><!-- Botón para agregar un nuevo departamento -->
+   
+    <!-- Tabla de datos de elementos -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Puesto</th>
+          <th>Departamento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for empleado in lista_empleados %}
+          <tr>
+            <td>{{ empleado.nombre }}</td>
+            <td>{{ empleado.apellido }}</td>
+            <td>{{ empleado.get_trabajo_display }}</td>
+            <td>{{ empleado.departamento.nombre }}</td>
+            <td>
+                <a href="{% url 'editar_empleado' empleado.id %}"class="btn btn-editar">Modificar</a> | <!-- Botón para editar -->
+                <a href="{% url 'eliminar_empleado' empleado.id %}"class="btn btn-eliminar">Eliminar</a> | <!-- Botón para eliminar -->
+                <a href="{% url 'detalle_empleado' empleado.id %}" class="btn btn-detalle">Detalle</a> <!-- Botón para detalle -->
+              </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="10" class="no-registro">No hay empleados registrados.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table> 
+  </div>
+</body>
+</html>
+
+
+              
